@@ -1,8 +1,17 @@
-var express = require('express');
-var app = express();
+const express = require("express");
+const app = express();
+const router = express.Router();
 
-app.get('/',function(req,res) {
-  res.send("Hello World");
+const path = __dirname + "/views/";
+const port = 8000;
+
+router.get("/", function (req, res) {
+  res.sendFile(path + "index.html");
 });
 
-app.listen(4000);
+app.use(express.static(path));
+app.use("/", router);
+
+app.listen(port, function () {
+  console.log("server listening on port 8000!");
+});
